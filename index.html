@@ -1,1 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Site</title>
 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #101014;
+            color: white;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 25px;
+            text-align: center;
+            background: #18181f;
+            border-bottom: 2px solid #30303a;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #aaa;
+        }
+
+        /* CARROSSEL */
+
+        .carousel-container {
+            width: 90%;
+            max-width: 900px;
+            margin: 40px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 450px;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+        }
+
+        .slide-text h2 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .slide-text p {
+            color: #ddd;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.65);
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .arrow:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .prev {
+            left: 15px;
+        }
+
+        .next {
+            right: 15px;
+        }
+
+        .dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #777;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: white;
+        }
+
+        /* JOGO */
+
+        .game-section {
+            width: 90%;
+            max-width: 900px;
+            margin: 60px auto;
+            text-align: center;
+        }
+
+        .game-section h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .game-section p {
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+
+        #game {
+            height: 400px;
+            background: #18181f;
+            border: 2px solid #30303a;
+            border-radius: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #target {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: #ff3b6b;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 0 20px rgba(255, 59, 107, 0.7);
+        }
+
+        #score {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        #startButton {
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #111;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        #startButton:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            margin-top: 60px;
+            padding: 25px;
+            text-align: center;
+            background: #18181f;
+            color: #777;
+        }
+
+        @media (max-width: 600px) {
+            .slide {
+                height: 300px;
+            }
+
+            .slide-text h2 {
+                font-size: 20px;
+            }
+
+            #game {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Meu Site</h1>
+        <p>Bem-vindo ao meu cantinho na internet 🚀</p>
+    </header>
+
+
+    <!-- CARROSSEL -->
+
+    <section class="carousel-container">
+
+        <div class="carousel" id="carousel">
+
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80">
+                <div class="slide-text">
+                    <h2>Imagem 1</h2>
+                    <p>Uma paisagem incrível.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=80">
+                <div class="slide-text">
+                    <h2>Imagem 2</h2>
+                    <p>Outro lugar para colocar suas fotos.</p>
+                </div>
+            </div>
+
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80">
+                <div class="slide-text">
+                    <h2>Imagem 3</h2>
+                    <p>Você pode trocar essas imagens depois.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="arrow prev" onclick="previousSlide()">❮</button>
+        <button class="arrow next" onclick="nextSlide()">❯</button>
+
+        <div class="dots">
+            <div class="dot active" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
+        </div>
+
+    </section>
+
+
+    <!-- JOGO -->
+
+    <section class="game-section">
+
+        <h2>🎯 Acerte o alvo</h2>
+
+        <p>
+            Clique no círculo o máximo de vezes que conseguir em 20 segundos!
+        </p>
+
+        <div id="score">
+            Pontos: <span id="points">0</span>
+            |
+            Tempo: <span id="time">20</span>s
+        </div>
+
+        <button id="startButton" onclick="startGame()">
+            Começar jogo
+        </button>
+
+        <div id="game">
+            <div id="target" onclick="hitTarget()"></div>
+        </div>
+
+    </section>
+
+
+    <footer>
+        <p>Meu Site • Feito por mim 😎</p>
+    </footer>
+
+
+    <script>
+
+        /* =========================
+           CARROSSEL
+        ========================= */
+
+        let currentSlide = 0;
+
+        const carousel = document.getElementById("carousel");
+        const dots = document.querySelectorAll(".dot");
+
+        function updateCarousel() {
+
+            carousel.style.transform =
+                `translateX(-${currentSlide * 100}%)`;
+
+            dots.forEach((dot, index) => {
+
+                dot.classList.toggle(
+                    "active",
+                    index === currentSlide
+                );
+
+            });
+        }
+
+        function nextSlide() {
+
+            currentSlide++;
+
+            if (currentSlide >= 3) {
+                currentSlide = 0;
+            }
+
+            updateCarousel();
+        }
+
+        function previousSlide() {
+
+            currentSlide--;
+
+            if (currentSlide < 0) {
+                currentSlide = 2;
+            }
+
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+
+            currentSlide = index;
+
+            updateCarousel();
+        }
+
+        /* Troca automaticamente a cada 5 segundos */
+
+        setInterval(nextSlide, 5000);
+
+
+        /* =========================
+           JOGO
+        ========================= */
+
+        let points = 0;
+        let time = 20;
+        let gameRunning = false;
+        let timer;
+
+        const target = document.getElementById("target");
+        const game = document.getElementById("game");
+
+        const pointsText = document.getElementById("points");
+        const timeText = document.getElementById("time");
+        const startButton = document.getElementById("startButton");
+
+
+        function startGame() {
+
+            points = 0;
+            time = 20;
+            gameRunning = true;
+
+            pointsText.textContent = points;
+            timeText.textContent = time;
+
+            startButton.disabled = true;
+            startButton.textContent = "Jogo rodando...";
+
+            target.style.display = "block";
+
+            moveTarget();
+
+            timer = setInterval(() => {
+
+                time--;
+
+                timeText.textContent = time;
+
+                if (time <= 0) {
+                    endGame();
+                }
+
+            }, 1000);
+        }
+
+
+        function moveTarget() {
+
+            const maxX = game.clientWidth - target.offsetWidth;
+            const maxY = game.clientHeight - target.offsetHeight;
+
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+
+            target.style.left = x + "px";
+            target.style.top = y + "px";
+        }
+
+
+        function hitTarget() {
+
+            if (!gameRunning) return;
+
+            points++;
+
+            pointsText.textContent = points;
+
+            moveTarget();
+        }
+
+
+        function endGame() {
+
+            clearInterval(timer);
+
+            gameRunning = false;
+
+            target.style.display = "none";
+
+            startButton.disabled = false;
+            startButton.textContent = "Jogar novamente";
+
+            alert("Fim de jogo! Você fez " + points + " pontos!");
+        }
+
+    </script>
+
+</body>
+</html>
